@@ -25,3 +25,16 @@ En este curso aprenderás a:
    pnpm install
    # o bien
    npm install
+
+
+
+
+
+   ## 🚀 Funcionalidades actuales
+- Representación tipada de GIFs mediante una interfaz `Gif`.
+- Galería generada dinámicamente desde un arreglo local.
+- Búsqueda por **título**, **autor**, **etiquetas** y **descripción**.
+- Manejo del caso sin resultados con un mensaje claro.
+- Tipado estricto en todas las funciones y estructuras.
+- Estilos básicos adaptables a pantallas pequeñas.
+
