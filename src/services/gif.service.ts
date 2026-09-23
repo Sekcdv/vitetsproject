@@ -1,34 +1,20 @@
-import type { Gif } from '../models/gif.interface';
-import { normalizeText } from '../utils/text';
-
-
-function matchesQuery(
-    gif: Gif,
-    query: string,
-): boolean {
-    const searchableText = [
-        gif.title,
-        gif.username ?? '',
-        ...gif.tags,
-    ].join(' ');
-    return normalizeText(searchableText)
-        .includes(query);
-}
-export function searchGifs(
-    collection: Gif[],
-    value: string,
-): Gif[] {
-    const query = normalizeText(value);
-    if (!query) {
-        return [...collection];
+import type { Gif, GifRating } from '../models/gif.interface';
+import type {
+    GiphyGif,
+    GiphyResponse,
+} from '../models/giphy-response.interface';
+const API_BASE_URL = 'https://api.giphy.com/v1/gifs';
+const RESULT_LIMIT = 12;
+type GiphyEndpoint = 'trending' | 'search';
+function getApiKey(): string {
+    const apiKey = import.meta.env.VITE_GIPHY_API_KEY;
+    if (!apiKey) {
+        throw new Error(
+            'Falta VITE_GIPHY_API_KEY en .env.local.',
+        );
     }
-    return collection.filter((gif) =>
-        matchesQuery(gif, query),
-    );
+    return apiKey;
 }
-export function findGifById(
-    collection: Gif[],
-    id: string,
-): Gif | undefined {
-    return collection.find((gif) => gif.id === id);
+function isGifRating(value: string): value is GifRating {
+    return value === 'g' || value === 'pg' || value === 'pg-13';
 }
