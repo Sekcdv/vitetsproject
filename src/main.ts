@@ -1,4 +1,5 @@
-import './styles/style.css';
+import './style/style.css';
+
 import {
   clearGifDetail,
   renderGifDetail,
